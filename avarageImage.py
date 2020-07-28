@@ -8,7 +8,7 @@ from skimage import io
 import collections
 
 
-img =cv2.imread('data/SoySyoy/image/1070341900639469569-DtqeRy0VsAALaqL.jpg')
+img =cv2.imread('data/subAccount/image/1070341900639469569-DtqeRy0VsAALaqL.jpg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 
