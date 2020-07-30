@@ -14,9 +14,11 @@ def extract_by_parse(sentence,word_p,word_n):
   nouns = []
   parsed=tagger.parse(sentence)
   for chunk in parsed.splitlines()[:-1]:
-    (surface, feature) = chunk.split('\t')
-    if (feature.split(',')[word_n]==word_p):
+    surface = chunk.split('\t')[0]
+    feature = chunk.split('\t')[4]
+    if (feature.split(',')[0].startswith(word_p)):#feature.split(',')[1]=='固有名詞'
       nouns.append(surface)
+  
   return nouns
 
 def extract_by_check(sentence, serch_word):
@@ -79,7 +81,7 @@ def doExeFrequentWords(data):
     print("選んでください 1:固有名詞 2:名詞 3:形容詞 4:動詞 5:助詞 6:助動詞 7:副詞")
     select_p = input()
     if select_p == "1":
-      word_p = "固有名詞"
+      word_p = "名詞-固有名詞"
       word_n = 1
       select_part = True
     elif select_p == "2":
@@ -172,6 +174,6 @@ data = selectAccount()
 if mode == 1:
   data = selectType(data)
   doExeFrequentWords(data)
-elif mode ==2:
+elif mode == 2:
   data += "tweet.js"
   doExeSerchWord(data)
