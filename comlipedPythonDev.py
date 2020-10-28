@@ -12,10 +12,11 @@ array_extra = []
 
 def extract_by_parse(sentence,word_p,word_n):
   nouns = []
-  parsed=tagger.parse(sentence)
+  parsed = tagger.parse(sentence)
+  # print(parsed)
   for chunk in parsed.splitlines()[:-1]:
     (surface, feature) = chunk.split('\t')
-    if (feature.split(',')[word_n].startswith(word_p)):#feature.split(',')[1]=='固有名詞'
+    if (feature.split(',')[word_n]==word_p):
       nouns.append(surface)
   return nouns
 
@@ -79,7 +80,7 @@ def doExeFrequentWords(data):
     print("選んでください 1:固有名詞 2:名詞 3:形容詞 4:動詞 5:助詞 6:助動詞 7:副詞")
     select_p = input()
     if select_p == "1":
-      word_p = "名詞-固有名詞"
+      word_p = "固有名詞"
       word_n = 1
       select_part = True
     elif select_p == "2":
