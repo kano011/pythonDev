@@ -3,3 +3,4 @@ extraction.py
 test.py
 testForMy.py
 .DS_Store
+/__pycache__
