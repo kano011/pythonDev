@@ -19,19 +19,16 @@ for filename in glob.glob(os.path.join(path, '*.jpg')):
   img =cv2.imread(filename)
   img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-
   flatten = img.reshape(-1,3)
 
   from sklearn.cluster import KMeans
   pred = KMeans(n_clusters=4).fit(flatten)
-
 
   out = zip(pred.labels_, flatten)
   clu0 = np.array([data.tolist() for label, data in zip(pred.labels_,flatten) if label==0])
   clu1 = np.array([data.tolist() for label, data in zip(pred.labels_,flatten) if label==1])
   clu2 = np.array([data.tolist() for label, data in zip(pred.labels_,flatten) if label==2])
   clu3 = np.array([data.tolist() for label, data in zip(pred.labels_,flatten) if label==3])
-
 
 
   print(collections.Counter(pred.labels_))
@@ -42,6 +39,7 @@ for filename in glob.glob(os.path.join(path, '*.jpg')):
   #画像生成
   blank = np.zeros((100,100,3))
   blank += pred.cluster_centers_[key]
+  blank = blank[:, :, [2, 1, 0]]
   name = str(path)+'/cv2/'+str(count)+'.png'
   cv2.imwrite(name,blank)
   print("finish: " + filename + name)
